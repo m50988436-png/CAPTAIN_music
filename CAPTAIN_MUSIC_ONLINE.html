@@ -1,0 +1,3599 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#080808">
+<title>CAPTAIN MUSIC</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  -webkit-tap-highlight-color:transparent;
+}
+
+:root{
+  --bg:#050505;
+  --bg2:#0b0b0d;
+  --card:#101012;
+  --card2:#151518;
+  --red:#ff1e35;
+  --red2:#ff5365;
+  --text:#fff;
+  --muted:#888;
+  --line:rgba(255,255,255,.08);
+  --accent:#ff2038;
+  --songAccent:#ff2038;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:
+  Tahoma,
+  Arial,
+  sans-serif;
+  background:
+    radial-gradient(circle at 50% -10%,rgba(255,20,40,.15),transparent 35%),
+    linear-gradient(180deg,#080808,#030303 80%);
+  color:var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+button,input,textarea{
+  font-family:inherit;
+}
+
+button{
+  border:0;
+  cursor:pointer;
+}
+
+img{
+  display:block;
+  max-width:100%;
+}
+
+::-webkit-scrollbar{
+  width:5px;
+  height:5px;
+}
+
+::-webkit-scrollbar-thumb{
+  background:#333;
+  border-radius:20px;
+}
+
+/* TOP */
+
+.top{
+  position:sticky;
+  top:0;
+  z-index:100;
+  height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 18px;
+  background:rgba(5,5,5,.9);
+  border-bottom:1px solid var(--line);
+  backdrop-filter:blur(14px);
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.logoMark{
+  width:40px;
+  height:40px;
+  border-radius:13px;
+  display:grid;
+  place-items:center;
+  background:
+    linear-gradient(145deg,#ff263d,#79000d);
+  box-shadow:0 0 25px rgba(255,20,40,.25);
+  font-weight:1000;
+}
+
+.brandTitle{
+  font-size:20px;
+  font-weight:1000;
+  letter-spacing:1px;
+}
+
+.brandSub{
+  font-size:8px;
+  color:#777;
+  letter-spacing:3px;
+  margin-top:2px;
+}
+
+.topActions{
+  display:flex;
+  gap:8px;
+}
+
+.iconBtn{
+  width:42px;
+  height:42px;
+  border-radius:14px;
+  background:#111113;
+  color:#fff;
+  border:1px solid var(--line);
+  display:grid;
+  place-items:center;
+  font-size:18px;
+  transition:.2s;
+}
+
+.iconBtn:active{
+  transform:scale(.92);
+}
+
+/* SEARCH */
+
+.searchWrap{
+  padding:15px 15px 5px;
+}
+
+.search{
+  height:52px;
+  border-radius:17px;
+  background:#111113;
+  border:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  padding:0 16px;
+  gap:10px;
+}
+
+.search span{
+  color:#777;
+}
+
+.search input{
+  width:100%;
+  height:100%;
+  background:transparent;
+  color:#fff;
+  border:0;
+  outline:0;
+  font-size:14px;
+}
+
+/* NEWS */
+
+.newsSection{
+  padding:16px 0 4px;
+}
+
+.sectionHead{
+  padding:0 16px 13px;
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+}
+
+.sectionTitle{
+  font-size:20px;
+  font-weight:1000;
+}
+
+.sectionTitle small{
+  display:block;
+  font-size:9px;
+  letter-spacing:2px;
+  color:#666;
+  margin-bottom:5px;
+  direction:ltr;
+}
+
+.newsRail{
+  display:flex;
+  gap:13px;
+  overflow-x:auto;
+  padding:0 16px 13px;
+  scroll-snap-type:x mandatory;
+  scrollbar-width:none;
+  overscroll-behavior-x:contain;
+}
+
+.newsRail::-webkit-scrollbar{
+  display:none;
+}
+
+.newsCard{
+  flex:0 0 205px;
+  height:225px;
+  scroll-snap-align:start;
+  border-radius:23px;
+  overflow:hidden;
+  position:relative;
+  background:#111;
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 15px 40px rgba(0,0,0,.25);
+  cursor:pointer;
+  transition:transform .25s,border-color .25s;
+}
+
+.newsCard:active{
+  transform:scale(.97);
+}
+
+.newsImage{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.newsNoImage{
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  font-size:55px;
+  background:
+    radial-gradient(circle at 30% 20%,rgba(255,30,55,.4),transparent 35%),
+    linear-gradient(145deg,#18181b,#070707);
+}
+
+.newsShade{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(180deg,transparent 25%,rgba(0,0,0,.2) 45%,rgba(0,0,0,.95));
+}
+
+.newsInfo{
+  position:absolute;
+  right:14px;
+  left:14px;
+  bottom:13px;
+}
+
+.newsTag{
+  display:inline-block;
+  background:var(--red);
+  padding:4px 8px;
+  border-radius:8px;
+  font-size:9px;
+  font-weight:bold;
+  margin-bottom:7px;
+}
+
+.newsTitle{
+  font-size:14px;
+  font-weight:900;
+  line-height:1.7;
+}
+
+.newsTime{
+  color:#aaa;
+  font-size:9px;
+  margin-top:4px;
+}
+
+/* HERO */
+
+.hero{
+  margin:16px;
+  min-height:260px;
+  border-radius:30px;
+  overflow:hidden;
+  position:relative;
+  background:
+    radial-gradient(circle at 70% 20%,rgba(255,20,45,.45),transparent 35%),
+    linear-gradient(135deg,#19191c,#070707);
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 25px 70px rgba(0,0,0,.4);
+}
+
+.hero:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(90deg,rgba(0,0,0,.92),rgba(0,0,0,.3),transparent);
+}
+
+.heroContent{
+  position:relative;
+  z-index:2;
+  padding:32px 24px;
+  max-width:620px;
+}
+
+.heroKicker{
+  color:#ff3348;
+  font-size:10px;
+  font-weight:bold;
+  letter-spacing:3px;
+  direction:ltr;
+}
+
+.hero h1{
+  font-size:40px;
+  line-height:1;
+  margin:12px 0;
+  letter-spacing:-2px;
+}
+
+.hero p{
+  color:#999;
+  line-height:1.9;
+  font-size:12px;
+}
+
+.heroButtons{
+  display:flex;
+  gap:8px;
+  margin-top:20px;
+  flex-wrap:wrap;
+}
+
+.redBtn,
+.darkBtn{
+  height:44px;
+  padding:0 17px;
+  border-radius:14px;
+  font-weight:900;
+}
+
+.redBtn{
+  color:#fff;
+  background:linear-gradient(135deg,#ff1730,#b90015);
+  box-shadow:0 8px 25px rgba(255,20,40,.2);
+}
+
+.darkBtn{
+  color:#fff;
+  background:#171719;
+  border:1px solid var(--line);
+}
+
+/* SECTIONS */
+
+.section{
+  margin-top:24px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  padding:0 15px;
+}
+
+@media(min-width:700px){
+  .grid{
+    grid-template-columns:repeat(4,minmax(0,1fr));
+  }
+}
+
+/* SONG CARD */
+
+.songCard{
+  background:linear-gradient(145deg,#111114,#0b0b0d);
+  border:1px solid var(--line);
+  border-radius:20px;
+  overflow:hidden;
+  position:relative;
+  cursor:pointer;
+  transition:transform .2s,border-color .2s;
+}
+
+.songCard:active{
+  transform:scale(.97);
+}
+
+.cover{
+  width:100%;
+  aspect-ratio:1;
+  object-fit:cover;
+  background:#151515;
+}
+
+.songBody{
+  padding:10px;
+}
+
+.songTitle{
+  font-size:13px;
+  font-weight:900;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.songArtist{
+  color:#777;
+  font-size:10px;
+  margin-top:5px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.songMeta{
+  display:flex;
+  justify-content:space-between;
+  color:#555;
+  font-size:9px;
+  margin-top:8px;
+}
+
+.likeSmall{
+  position:absolute;
+  top:9px;
+  left:9px;
+  width:34px;
+  height:34px;
+  border-radius:11px;
+  background:rgba(0,0,0,.65);
+  color:#fff;
+  display:grid;
+  place-items:center;
+  z-index:3;
+  backdrop-filter:blur(5px);
+}
+
+.likeSmall.active{
+  color:#ff2940;
+}
+
+.playFloat{
+  position:absolute;
+  bottom:64px;
+  right:9px;
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:#fff;
+  color:#000;
+  display:grid;
+  place-items:center;
+  z-index:3;
+  box-shadow:0 8px 20px rgba(0,0,0,.4);
+}
+
+/* ARTISTS */
+
+.artistRail{
+  display:flex;
+  gap:14px;
+  overflow-x:auto;
+  padding:0 16px 5px;
+  scrollbar-width:none;
+}
+
+.artistRail::-webkit-scrollbar{
+  display:none;
+}
+
+.artist{
+  flex:0 0 95px;
+  text-align:center;
+}
+
+.artistImg{
+  width:88px;
+  height:88px;
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid #29292b;
+  margin:auto;
+  background:#111;
+}
+
+.artistName{
+  margin-top:8px;
+  font-size:11px;
+  font-weight:bold;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+/* EMPTY */
+
+.empty{
+  margin:0 15px;
+  padding:35px 15px;
+  text-align:center;
+  border:1px dashed #29292c;
+  border-radius:20px;
+  color:#666;
+  font-size:12px;
+}
+
+/* PLAYER */
+
+.player{
+  position:fixed;
+  z-index:500;
+  bottom:0;
+  left:0;
+  right:0;
+  min-height:78px;
+  padding:9px 12px calc(9px + env(safe-area-inset-bottom));
+  background:rgba(9,9,10,.96);
+  border-top:1px solid rgba(255,255,255,.1);
+  box-shadow:0 -15px 50px rgba(0,0,0,.5);
+  backdrop-filter:blur(16px);
+  cursor:pointer;
+}
+
+.playerInner{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.playerCover{
+  width:53px;
+  height:53px;
+  border-radius:13px;
+  object-fit:cover;
+  background:#171717;
+}
+
+.playerInfo{
+  min-width:0;
+  flex:1;
+}
+
+.playerTitle{
+  font-size:12px;
+  font-weight:bold;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.playerArtist{
+  font-size:9px;
+  color:#777;
+  margin-top:4px;
+}
+
+.playerBtns{
+  display:flex;
+  align-items:center;
+  gap:5px;
+}
+
+.pBtn{
+  width:36px;
+  height:36px;
+  border-radius:11px;
+  color:#fff;
+  background:#171719;
+}
+
+.pBtn.main{
+  background:#fff;
+  color:#000;
+  border-radius:50%;
+}
+
+.progress{
+  position:absolute;
+  top:-2px;
+  left:0;
+  right:0;
+  height:3px;
+  background:#242427;
+}
+
+.progress i{
+  display:block;
+  height:100%;
+  width:0;
+  background:var(--songAccent);
+}
+
+/* FULL SONG PROFILE */
+
+.profile{
+  position:fixed;
+  inset:0;
+  z-index:800;
+  background:
+    radial-gradient(circle at 50% 15%,color-mix(in srgb,var(--songAccent) 24%,transparent),transparent 38%),
+    #050505;
+  overflow-y:auto;
+  transform:translateY(100%);
+  transition:transform .4s cubic-bezier(.2,.8,.2,1);
+}
+
+.profile.open{
+  transform:translateY(0);
+}
+
+.profileTop{
+  position:sticky;
+  top:0;
+  z-index:5;
+  height:70px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 16px;
+  background:linear-gradient(180deg,rgba(5,5,5,.95),transparent);
+}
+
+.profileLabel{
+  font-size:10px;
+  letter-spacing:3px;
+  color:#777;
+  direction:ltr;
+}
+
+.profileHero{
+  padding:15px 18px 35px;
+  text-align:center;
+}
+
+.profileCoverWrap{
+  width:min(78vw,340px);
+  aspect-ratio:1;
+  margin:0 auto;
+  position:relative;
+}
+
+.profileGlow{
+  position:absolute;
+  inset:12%;
+  border-radius:35px;
+  background:var(--songAccent);
+  opacity:.22;
+  filter:blur(40px);
+}
+
+.profileCover{
+  position:relative;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:32px;
+  border:1px solid rgba(255,255,255,.1);
+  box-shadow:0 30px 90px rgba(0,0,0,.6);
+}
+
+.profilePlaying{
+  position:absolute;
+  bottom:14px;
+  right:14px;
+  left:14px;
+  height:44px;
+  border-radius:15px;
+  background:rgba(0,0,0,.62);
+  backdrop-filter:blur(10px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+}
+
+.eq{
+  width:3px;
+  border-radius:3px;
+  background:var(--songAccent);
+  height:8px;
+}
+
+.eq:nth-child(2){height:17px}
+.eq:nth-child(3){height:25px}
+.eq:nth-child(4){height:14px}
+.eq:nth-child(5){height:21px}
+
+.profile.playing .eq{
+  animation:eq .65s ease-in-out infinite alternate;
+}
+
+.profile.playing .eq:nth-child(2){animation-delay:.1s}
+.profile.playing .eq:nth-child(3){animation-delay:.2s}
+.profile.playing .eq:nth-child(4){animation-delay:.3s}
+.profile.playing .eq:nth-child(5){animation-delay:.4s}
+
+@keyframes eq{
+  from{transform:scaleY(.35)}
+  to{transform:scaleY(1)}
+}
+
+.profileTitle{
+  font-size:27px;
+  font-weight:1000;
+  margin-top:23px;
+}
+
+.profileArtist{
+  color:#999;
+  font-size:13px;
+  margin-top:7px;
+}
+
+.profileStats{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-top:15px;
+}
+
+.statPill{
+  background:#111113;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:8px 11px;
+  color:#aaa;
+  font-size:9px;
+}
+
+.profileActions{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:9px;
+  padding:0 15px;
+  max-width:700px;
+  margin:auto;
+}
+
+.action{
+  min-height:68px;
+  border-radius:18px;
+  background:#111113;
+  border:1px solid var(--line);
+  color:#fff;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  transition:.2s;
+}
+
+.action:active{
+  transform:scale(.94);
+}
+
+.action .ico{
+  font-size:19px;
+}
+
+.action small{
+  color:#999;
+  font-size:9px;
+}
+
+.action.primary{
+  background:linear-gradient(145deg,#ff2038,#8d0010);
+  border-color:transparent;
+}
+
+.profileProgress{
+  max-width:700px;
+  padding:25px 18px 0;
+  margin:auto;
+}
+
+.profileSeek{
+  height:5px;
+  border-radius:10px;
+  background:#222;
+  cursor:pointer;
+}
+
+.profileSeek i{
+  display:block;
+  height:100%;
+  width:0;
+  border-radius:10px;
+  background:var(--songAccent);
+}
+
+.timeRow{
+  display:flex;
+  justify-content:space-between;
+  color:#666;
+  font-size:9px;
+  margin-top:7px;
+  direction:ltr;
+}
+
+.profileBlock{
+  max-width:900px;
+  margin:30px auto 0;
+}
+
+.profileBlockHead{
+  padding:0 17px 12px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.profileBlockHead h3{
+  font-size:16px;
+}
+
+.profileBlockHead span{
+  font-size:9px;
+  color:#666;
+  letter-spacing:2px;
+  direction:ltr;
+}
+
+.profileList{
+  display:flex;
+  gap:11px;
+  overflow-x:auto;
+  padding:0 17px 25px;
+  scrollbar-width:none;
+}
+
+.profileList::-webkit-scrollbar{
+  display:none;
+}
+
+.profileMini{
+  flex:0 0 135px;
+  background:#101012;
+  border:1px solid var(--line);
+  border-radius:17px;
+  overflow:hidden;
+  cursor:pointer;
+}
+
+.profileMini img{
+  width:100%;
+  aspect-ratio:1;
+  object-fit:cover;
+}
+
+.profileMini div{
+  padding:8px;
+}
+
+.profileMini b{
+  font-size:10px;
+  display:block;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+
+.profileMini span{
+  display:block;
+  color:#666;
+  font-size:8px;
+  margin-top:4px;
+}
+
+/* DRAWER */
+
+.drawerBack{
+  position:fixed;
+  inset:0;
+  z-index:900;
+  background:rgba(0,0,0,.65);
+  opacity:0;
+  pointer-events:none;
+  transition:.25s;
+}
+
+.drawerBack.open{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.drawer{
+  position:absolute;
+  right:0;
+  top:0;
+  bottom:0;
+  width:min(88vw,360px);
+  background:#0a0a0b;
+  border-left:1px solid var(--line);
+  transform:translateX(100%);
+  transition:.3s;
+  padding:22px 15px;
+  overflow:auto;
+}
+
+.drawerBack.open .drawer{
+  transform:translateX(0);
+}
+
+.drawerTitle{
+  font-size:25px;
+  font-weight:1000;
+  margin-bottom:20px;
+}
+
+.menuItem{
+  width:100%;
+  min-height:52px;
+  border-radius:15px;
+  background:#111113;
+  border:1px solid var(--line);
+  color:#fff;
+  margin-bottom:8px;
+  display:flex;
+  align-items:center;
+  gap:11px;
+  padding:0 15px;
+  text-align:right;
+}
+
+.menuItem span:first-child{
+  width:28px;
+  text-align:center;
+}
+
+/* MODALS */
+
+.modalBack{
+  position:fixed;
+  inset:0;
+  z-index:1000;
+  background:rgba(0,0,0,.78);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:15px;
+}
+
+.modalBack.open{
+  display:flex;
+}
+
+.modal{
+  width:min(650px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:#0d0d0f;
+  border:1px solid var(--line);
+  border-radius:25px;
+  padding:20px;
+  box-shadow:0 30px 100px #000;
+}
+
+.modalHead{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:15px;
+}
+
+.modal h2{
+  font-size:20px;
+}
+
+.close{
+  width:38px;
+  height:38px;
+  border-radius:12px;
+  background:#18181b;
+  color:#fff;
+}
+
+/* NEWS DETAIL */
+
+.newsDetailImage{
+  width:100%;
+  max-height:360px;
+  object-fit:cover;
+  border-radius:18px;
+  margin-bottom:18px;
+}
+
+.newsDetailNoImage{
+  height:250px;
+  border-radius:18px;
+  display:grid;
+  place-items:center;
+  font-size:70px;
+  background:linear-gradient(145deg,#18181b,#080808);
+  margin-bottom:18px;
+}
+
+.newsDetailTitle{
+  font-size:25px;
+  font-weight:1000;
+  line-height:1.6;
+}
+
+.newsDetailDate{
+  color:#666;
+  font-size:10px;
+  margin:8px 0 17px;
+}
+
+.newsDetailText{
+  color:#bbb;
+  line-height:2.2;
+  white-space:pre-wrap;
+  font-size:13px;
+}
+
+/* OWNER */
+
+.form{
+  display:grid;
+  gap:10px;
+}
+
+.input,
+.textarea{
+  width:100%;
+  border:1px solid var(--line);
+  background:#111113;
+  color:#fff;
+  border-radius:14px;
+  padding:13px;
+  outline:none;
+}
+
+.textarea{
+  min-height:120px;
+  resize:vertical;
+}
+
+.fileInput{
+  padding:12px;
+  background:#111113;
+  border:1px dashed #333;
+  border-radius:14px;
+  color:#888;
+}
+
+.ownerList{
+  margin-top:25px;
+  display:grid;
+  gap:9px;
+}
+
+.ownerItem{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:#111113;
+  border:1px solid var(--line);
+  border-radius:15px;
+  padding:8px;
+}
+
+.ownerItem img{
+  width:50px;
+  height:50px;
+  object-fit:cover;
+  border-radius:10px;
+}
+
+.ownerItemInfo{
+  min-width:0;
+  flex:1;
+}
+
+.ownerItemInfo b{
+  display:block;
+  font-size:11px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.ownerItemInfo span{
+  display:block;
+  color:#666;
+  font-size:9px;
+  margin-top:4px;
+}
+
+.deleteBtn{
+  width:38px;
+  height:38px;
+  border-radius:11px;
+  background:#2a0b0e;
+  color:#ff5263;
+}
+
+/* QUEUE */
+
+.queueItem{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:9px;
+  background:#111113;
+  border:1px solid var(--line);
+  border-radius:15px;
+  margin-bottom:8px;
+}
+
+.queueItem img{
+  width:50px;
+  height:50px;
+  object-fit:cover;
+  border-radius:10px;
+}
+
+.queueInfo{
+  flex:1;
+  min-width:0;
+}
+
+.queueInfo b{
+  font-size:11px;
+  display:block;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.queueInfo span{
+  font-size:9px;
+  color:#666;
+}
+
+/* TOAST */
+
+.toast{
+  position:fixed;
+  z-index:2000;
+  left:50%;
+  bottom:95px;
+  transform:translate(-50%,20px);
+  opacity:0;
+  pointer-events:none;
+  background:#171719;
+  border:1px solid #333;
+  color:#fff;
+  padding:11px 16px;
+  border-radius:14px;
+  font-size:11px;
+  transition:.25s;
+  white-space:nowrap;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translate(-50%,0);
+}
+
+/* LOAD */
+
+.loader{
+  position:fixed;
+  inset:0;
+  z-index:3000;
+  display:grid;
+  place-items:center;
+  background:#050505;
+  transition:.35s;
+}
+
+.loader.hide{
+  opacity:0;
+  pointer-events:none;
+}
+
+.loaderLogo{
+  font-size:30px;
+  font-weight:1000;
+  letter-spacing:2px;
+  animation:pulse 1.2s infinite alternate;
+}
+
+@keyframes pulse{
+  from{opacity:.45;transform:scale(.98)}
+  to{opacity:1;transform:scale(1)}
+}
+
+/* DESKTOP */
+
+@media(min-width:900px){
+  .top{
+    padding:0 40px;
+  }
+
+  .searchWrap{
+    padding-left:40px;
+    padding-right:40px;
+  }
+
+  .hero{
+    margin-left:40px;
+    margin-right:40px;
+  }
+
+  .grid{
+    padding-left:40px;
+    padding-right:40px;
+  }
+
+  .sectionHead{
+    padding-left:40px;
+    padding-right:40px;
+  }
+}
+
+@media(max-width:450px){
+  .profileActions{
+    grid-template-columns:repeat(4,1fr);
+  }
+
+  .action{
+    min-height:63px;
+  }
+
+  .action small{
+    font-size:8px;
+  }
+
+  .hero h1{
+    font-size:34px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="loader" id="loader">
+  <div class="loaderLogo">CAPTAIN MUSIC</div>
+</div>
+
+<header class="top">
+  <div class="brand">
+    <div class="logoMark">C</div>
+    <div>
+      <div class="brandTitle">CAPTAIN MUSIC</div>
+      <div class="brandSub">PREMIUM MUSIC EXPERIENCE</div>
+    </div>
+  </div>
+
+  <div class="topActions">
+    <button class="iconBtn" onclick="openDrawer()">☰</button>
+  </div>
+</header>
+
+<div class="searchWrap">
+  <div class="search">
+    <span>⌕</span>
+    <input id="searchInput" placeholder="جستجوی آهنگ، خواننده یا خبر..." oninput="debouncedSearch()">
+  </div>
+</div>
+
+<!-- NEWS -->
+<section class="newsSection">
+  <div class="sectionHead">
+    <div>
+      <div class="sectionTitle">
+        <small>MUSIC NEWS</small>
+        اخبار موسیقی
+      </div>
+    </div>
+    <button class="darkBtn" onclick="openAllNews()">همه اخبار</button>
+  </div>
+
+  <div class="newsRail" id="newsRail"></div>
+</section>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="heroContent">
+    <div class="heroKicker">CAPTAIN MUSIC</div>
+    <h1>موسیقی<br>با حال‌وهوای تو</h1>
+    <p>
+      آهنگ‌های مورد علاقه‌ات را پیدا کن، گوش بده،
+      به صف پخش اضافه کن و موزیک جدید کشف کن.
+    </p>
+
+    <div class="heroButtons">
+      <button class="redBtn" onclick="playRandom()">▶ پخش تصادفی</button>
+      <button class="darkBtn" onclick="openDrawer()">☰ منو</button>
+    </div>
+  </div>
+</section>
+
+<main id="home">
+
+  <section class="section">
+    <div class="sectionHead">
+      <div class="sectionTitle">
+        <small>LIVE RANKING</small>
+        🔥 CAPTAIN NOW
+      </div>
+    </div>
+    <div class="grid" id="nowGrid"></div>
+  </section>
+
+  <section class="section">
+    <div class="sectionHead">
+      <div class="sectionTitle">
+        <small>LAST 24 HOURS</small>
+        ⚡ محبوب‌ترین‌های ۲۴ ساعت
+      </div>
+    </div>
+    <div class="grid" id="dayGrid"></div>
+  </section>
+
+  <section class="section">
+    <div class="sectionHead">
+      <div class="sectionTitle">
+        <small>NEW RELEASES</small>
+        🆕 آهنگ‌های جدید
+      </div>
+    </div>
+    <div class="grid" id="newGrid"></div>
+  </section>
+
+  <section class="section">
+    <div class="sectionHead">
+      <div class="sectionTitle">
+        <small>ALL TIME</small>
+        👑 محبوب‌ترین‌ها
+      </div>
+    </div>
+    <div class="grid" id="popularGrid"></div>
+  </section>
+
+  <section class="section">
+    <div class="sectionHead">
+      <div class="sectionTitle">
+        <small>MY MUSIC</small>
+        🎧 موزیک‌های من
+      </div>
+    </div>
+    <div class="grid" id="myGrid"></div>
+  </section>
+
+  <section class="section">
+    <div class="sectionHead">
+      <div class="sectionTitle">
+        <small>FAVORITES</small>
+        ❤️ موردعلاقه‌ها
+      </div>
+    </div>
+    <div class="grid" id="favGrid"></div>
+  </section>
+
+  <section class="section">
+    <div class="sectionHead">
+      <div class="sectionTitle">
+        <small>ARTISTS</small>
+        🎤 خواننده‌ها
+      </div>
+    </div>
+    <div class="artistRail" id="artistRail"></div>
+  </section>
+
+  <section class="section" style="padding-bottom:150px">
+    <div class="sectionHead">
+      <div class="sectionTitle">
+        <small>HISTORY</small>
+        🕘 تاریخچه
+      </div>
+    </div>
+    <div class="grid" id="historyGrid"></div>
+  </section>
+
+</main>
+
+<!-- PLAYER -->
+
+<div class="player" id="player">
+  <div class="progress"><i id="playerProgress"></i></div>
+
+  <div class="playerInner">
+    <img id="playerCover" class="playerCover">
+
+    <div class="playerInfo">
+      <div id="playerTitle" class="playerTitle">هنوز آهنگی پخش نشده</div>
+      <div id="playerArtist" class="playerArtist">CAPTAIN MUSIC</div>
+    </div>
+
+    <div class="playerBtns">
+      <button class="pBtn" onclick="event.stopPropagation();previousSong()">‹</button>
+      <button class="pBtn main" id="playBtn" onclick="event.stopPropagation();togglePlay()">▶</button>
+      <button class="pBtn" onclick="event.stopPropagation();nextSong()">›</button>
+    </div>
+  </div>
+</div>
+
+<!-- SONG PROFILE -->
+
+<div class="profile" id="profile">
+
+  <div class="profileTop">
+    <button class="iconBtn" onclick="closeProfile()">↓</button>
+    <div class="profileLabel">NOW PLAYING</div>
+    <button class="iconBtn" onclick="openQueue()">☷</button>
+  </div>
+
+  <div class="profileHero">
+
+    <div class="profileCoverWrap">
+      <div class="profileGlow"></div>
+      <img id="profileCover" class="profileCover">
+
+      <div class="profilePlaying">
+        <span class="eq"></span>
+        <span class="eq"></span>
+        <span class="eq"></span>
+        <span class="eq"></span>
+        <span class="eq"></span>
+      </div>
+    </div>
+
+    <div id="profileTitle" class="profileTitle">—</div>
+    <div id="profileArtist" class="profileArtist">—</div>
+
+    <div class="profileStats">
+      <div class="statPill">▶ <span id="profilePlays">0</span> پخش</div>
+      <div class="statPill">♥ <span id="profileLikes">0</span> لایک</div>
+      <div class="statPill" id="profileTrend">—</div>
+    </div>
+
+  </div>
+
+  <div class="profileActions">
+
+    <button class="action primary" onclick="profilePlay()">
+      <span class="ico">▶</span>
+      <small>پخش</small>
+    </button>
+
+    <button class="action" onclick="profileLike()">
+      <span class="ico">♥</span>
+      <small>پسندیدن</small>
+    </button>
+
+    <button class="action" onclick="profileNext()">
+      <span class="ico">⏭</span>
+      <small>پخش بعدی</small>
+    </button>
+
+    <button class="action" onclick="profileQueue()">
+      <span class="ico">＋</span>
+      <small>صف پخش</small>
+    </button>
+
+    <button class="action" onclick="profilePlaylist()">
+      <span class="ico">▤</span>
+      <small>پلی‌لیست</small>
+    </button>
+
+    <button class="action" onclick="profileShare()">
+      <span class="ico">↗</span>
+      <small>اشتراک</small>
+    </button>
+
+    <button class="action" onclick="profileHistory()">
+      <span class="ico">◷</span>
+      <small>تاریخچه</small>
+    </button>
+
+    <button class="action" onclick="profileArtist()">
+      <span class="ico">♬</span>
+      <small>خواننده</small>
+    </button>
+
+  </div>
+
+  <div class="profileProgress">
+    <div class="profileSeek" id="profileSeek">
+      <i id="profileProgress"></i>
+    </div>
+    <div class="timeRow">
+      <span id="currentTime">0:00</span>
+      <span id="duration">0:00</span>
+    </div>
+  </div>
+
+  <div class="profileBlock">
+    <div class="profileBlockHead">
+      <h3>صف پخش</h3>
+      <span>QUEUE</span>
+    </div>
+    <div class="profileList" id="profileQueue"></div>
+  </div>
+
+  <div class="profileBlock">
+    <div class="profileBlockHead">
+      <h3>پیشنهاد برای تو</h3>
+      <span>FOR YOU</span>
+    </div>
+    <div class="profileList" id="profileSuggestions"></div>
+  </div>
+
+</div>
+
+<!-- DRAWER -->
+
+<div class="drawerBack" id="drawerBack" onclick="closeDrawer(event)">
+  <aside class="drawer" onclick="event.stopPropagation()">
+
+    <div class="drawerTitle">CAPTAIN MUSIC</div>
+
+    <button class="menuItem" onclick="closeDrawer()">
+      <span>⌂</span> خانه
+    </button>
+
+    <button class="menuItem" onclick="openQueue()">
+      <span>☷</span> صف پخش
+    </button>
+
+    <button class="menuItem" onclick="scrollToSection('favGrid');closeDrawer()">
+      <span>♥</span> موردعلاقه‌ها
+    </button>
+
+    <button class="menuItem" onclick="scrollToSection('myGrid');closeDrawer()">
+      <span>🎧</span> موزیک‌های من
+    </button>
+
+    <button class="menuItem" onclick="scrollToSection('historyGrid');closeDrawer()">
+      <span>◷</span> تاریخچه
+    </button>
+
+    <button class="menuItem" onclick="playRandom();closeDrawer()">
+      <span>♬</span> Surprise Me
+    </button>
+
+    <button class="menuItem" onclick="toggleRadio();closeDrawer()">
+      <span>📻</span> CAPTAIN Radio
+    </button>
+
+    <button class="menuItem" onclick="openOwnerLogin()">
+      <span>♛</span> ورود مالک
+    </button>
+
+    <button class="menuItem" onclick="openAbout();closeDrawer()">
+      <span>ⓘ</span> درباره CAPTAIN MUSIC
+    </button>
+
+  </aside>
+</div>
+
+<!-- MODAL -->
+
+<div class="modalBack" id="modalBack" onclick="closeModal(event)">
+  <div class="modal" onclick="event.stopPropagation()" id="modalContent"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<audio id="audio" preload="metadata"></audio>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-storage-compat.js"></script>
+
+<script>
+/* =========================================================
+   CAPTAIN MUSIC
+   IndexedDB + Music Player
+========================================================= */
+
+const DB_NAME = "CAPTAIN_MUSIC_DATABASE";
+const DB_VERSION = 4;
+
+const OWNER_PASSWORD = "mani3646";
+
+/* =========================================================
+   ONLINE MODE — Firebase
+   فقط مقادیر پروژه Firebase خودت را اینجا قرار بده.
+   اگر خالی بماند، سایت مثل قبل با IndexedDB کار می‌کند.
+========================================================= */
+const FIREBASE_CONFIG = {
+  apiKey: "PASTE_YOUR_FIREBASE_API_KEY",
+  authDomain: "PASTE_YOUR_PROJECT.firebaseapp.com",
+  projectId: "PASTE_YOUR_PROJECT_ID",
+  storageBucket: "PASTE_YOUR_STORAGE_BUCKET",
+  messagingSenderId: "PASTE_YOUR_MESSAGING_SENDER_ID",
+  appId: "PASTE_YOUR_FIREBASE_APP_ID"
+};
+
+let cloudEnabled = false;
+let cloudDb = null;
+let cloudStorage = null;
+
+function initCloud(){
+  try{
+    const valid = FIREBASE_CONFIG.apiKey &&
+      !FIREBASE_CONFIG.apiKey.startsWith("PASTE_") &&
+      FIREBASE_CONFIG.projectId &&
+      !FIREBASE_CONFIG.projectId.startsWith("PASTE_");
+
+    if(!valid || typeof firebase === "undefined") return false;
+
+    if(!firebase.apps.length){
+      firebase.initializeApp(FIREBASE_CONFIG);
+    }
+
+    cloudDb=firebase.firestore();
+    cloudStorage=firebase.storage();
+    cloudEnabled=true;
+    console.log("CAPTAIN MUSIC: ONLINE MODE enabled");
+    return true;
+  }catch(error){
+    console.warn("CAPTAIN MUSIC: online mode unavailable, using local storage",error);
+    cloudEnabled=false;
+    return false;
+  }
+}
+
+let db;
+let songs = [];
+let news = [];
+
+let currentSong = null;
+let currentIndex = -1;
+
+let queue = [];
+let history = [];
+let playlists = {};
+let radioMode = false;
+
+const audio = document.getElementById("audio");
+
+const audioUrls = new Map();
+const coverUrls = new Map();
+const newsImageUrls = new Map();
+
+let searchTimer = null;
+
+/* ================= DATABASE ================= */
+
+function openDB(){
+  return new Promise((resolve,reject)=>{
+    const req = indexedDB.open(DB_NAME,DB_VERSION);
+
+    req.onupgradeneeded = e=>{
+      const database = e.target.result;
+
+      if(!database.objectStoreNames.contains("songs")){
+        database.createObjectStore("songs",{keyPath:"id"});
+      }
+
+      if(!database.objectStoreNames.contains("news")){
+        database.createObjectStore("news",{keyPath:"id"});
+      }
+
+      if(!database.objectStoreNames.contains("banners")){
+        database.createObjectStore("banners",{keyPath:"id"});
+      }
+
+      if(!database.objectStoreNames.contains("userData")){
+        database.createObjectStore("userData",{keyPath:"key"});
+      }
+    };
+
+    req.onsuccess = e=>{
+      db=e.target.result;
+      resolve(db);
+    };
+
+    req.onerror = ()=>reject(req.error);
+  });
+}
+
+function dbGetAll(store){
+  return new Promise((resolve,reject)=>{
+    const tx=db.transaction(store,"readonly");
+    const req=tx.objectStore(store).getAll();
+
+    req.onsuccess=()=>resolve(req.result||[]);
+    req.onerror=()=>reject(req.error);
+  });
+}
+
+async function cloudUploadBlob(path,blob){
+  if(!cloudEnabled || !blob) return "";
+  const ref=cloudStorage.ref().child(path);
+  await ref.put(blob);
+  return await ref.getDownloadURL();
+}
+
+async function cloudPut(store,value){
+  if(!cloudEnabled || !cloudDb) return;
+
+  const data={...value};
+
+  if(store==="songs"){
+    if(value.audioBlob instanceof Blob){
+      data.audioUrl=await cloudUploadBlob(`songs/${value.id}/audio`,value.audioBlob);
+    }
+    if(value.coverBlob instanceof Blob){
+      data.coverUrl=await cloudUploadBlob(`songs/${value.id}/cover`,value.coverBlob);
+    }
+    delete data.audioBlob;
+    delete data.coverBlob;
+  }
+
+  if(store==="news"){
+    if(value.imageBlob instanceof Blob){
+      data.imageUrl=await cloudUploadBlob(`news/${value.id}/image`,value.imageBlob);
+    }
+    delete data.imageBlob;
+  }
+
+  await cloudDb.collection(store).doc(String(value.id)).set(data,{merge:true});
+}
+
+async function dbPut(store,value){
+  // Keep the existing local cache, while mirroring public content online.
+  await new Promise((resolve,reject)=>{
+    const tx=db.transaction(store,"readwrite");
+    tx.objectStore(store).put(value);
+    tx.oncomplete=()=>resolve();
+    tx.onerror=()=>reject(tx.error);
+  });
+
+  if((store==="songs" || store==="news") && cloudEnabled){
+    try{
+      await cloudPut(store,value);
+    }catch(error){
+      console.error("Cloud save failed:",error);
+      showToast("ذخیره آنلاین انجام نشد");
+    }
+  }
+}
+
+async function dbDelete(store,id){
+  await new Promise((resolve,reject)=>{
+    const tx=db.transaction(store,"readwrite");
+    tx.objectStore(store).delete(id);
+    tx.oncomplete=()=>resolve();
+    tx.onerror=()=>reject(tx.error);
+  });
+
+  if((store==="songs" || store==="news") && cloudEnabled){
+    try{
+      await cloudDb.collection(store).doc(String(id)).delete();
+    }catch(error){
+      console.error("Cloud delete failed:",error);
+    }
+  }
+}
+
+async function getCloudCollection(name){
+  if(!cloudEnabled || !cloudDb) return [];
+  const snap=await cloudDb.collection(name).get();
+  return snap.docs.map(d=>({id:d.id,...d.data()}));
+}
+
+async function loadData(){
+  const localSongs=await dbGetAll("songs");
+  const localNews=await dbGetAll("news");
+
+  if(cloudEnabled){
+    try{
+      const remoteSongs=await getCloudCollection("songs");
+      const remoteNews=await getCloudCollection("news");
+
+      // First online run: migrate existing local content to the cloud.
+      if(remoteSongs.length===0 && localSongs.length){
+        for(const item of localSongs) await cloudPut("songs",item);
+      }
+      if(remoteNews.length===0 && localNews.length){
+        for(const item of localNews) await cloudPut("news",item);
+      }
+
+      const finalSongs=remoteSongs.length ? remoteSongs : localSongs;
+      const finalNews=remoteNews.length ? remoteNews : localNews;
+
+      songs=finalSongs;
+      news=finalNews;
+
+      // Cache online records locally too.
+      for(const item of songs){
+        await dbPutLocalOnly("songs",item);
+      }
+      for(const item of news){
+        await dbPutLocalOnly("news",item);
+      }
+    }catch(error){
+      console.warn("Cloud load failed, using local data",error);
+      songs=localSongs;
+      news=localNews;
+    }
+  }else{
+    songs=localSongs;
+    news=localNews;
+  }
+
+  const user=await dbGetAll("userData");
+
+  user.forEach(x=>{
+    if(x.key==="history") history=x.value||[];
+    if(x.key==="queue") queue=x.value||[];
+    if(x.key==="playlists") playlists=x.value||{};
+  });
+}
+
+function dbPutLocalOnly(store,value){
+  return new Promise((resolve,reject)=>{
+    const tx=db.transaction(store,"readwrite");
+    tx.objectStore(store).put(value);
+    tx.oncomplete=()=>resolve();
+    tx.onerror=()=>reject(tx.error);
+  });
+}
+
+async function saveUserData(key,value){
+  await dbPut("userData",{key,value});
+}
+
+/* ================= HELPERS ================= */
+
+function uid(){
+  return Date.now()+"_"+Math.random().toString(36).slice(2,9);
+}
+
+function normalize(s=""){
+  return String(s)
+    .toLowerCase()
+    .replace(/ي/g,"ی")
+    .replace(/ى/g,"ی")
+    .replace(/ك/g,"ک")
+    .replace(/ۀ/g,"ه")
+    .replace(/ة/g,"ه")
+    .replace(/\u200c/g," ")
+    .replace(/\s+/g," ")
+    .trim();
+}
+
+function escapeHTML(str=""){
+  return String(str)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+function formatNumber(n){
+  return Number(n||0).toLocaleString("fa-IR");
+}
+
+function formatTime(sec){
+  if(!isFinite(sec)) return "0:00";
+
+  sec=Math.floor(sec);
+
+  const m=Math.floor(sec/60);
+  const s=String(sec%60).padStart(2,"0");
+
+  return `${m}:${s}`;
+}
+
+function timeAgo(timestamp){
+  if(!timestamp) return "";
+
+  const diff=Date.now()-timestamp;
+
+  const min=Math.floor(diff/60000);
+  const hour=Math.floor(min/60);
+  const day=Math.floor(hour/24);
+
+  if(min<1) return "همین الان";
+  if(min<60) return `${min} دقیقه پیش`;
+  if(hour<24) return `${hour} ساعت پیش`;
+  return `${day} روز پیش`;
+}
+
+function showToast(text){
+  const el=document.getElementById("toast");
+
+  el.textContent=text;
+  el.classList.add("show");
+
+  clearTimeout(showToast.t);
+
+  showToast.t=setTimeout(()=>{
+    el.classList.remove("show");
+  },1800);
+}
+
+function scrollToSection(id){
+  document.getElementById(id)?.scrollIntoView({
+    behavior:"smooth",
+    block:"center"
+  });
+}
+
+function parseFilename(filename){
+  const clean=filename.replace(/\.[^/.]+$/,"").trim();
+
+  const parts=clean.split(/\s[-–—]\s/);
+
+  if(parts.length>=2){
+    return {
+      artist:parts.shift().trim()||"ناشناخته",
+      title:parts.join(" - ").trim()||clean
+    };
+  }
+
+  return {
+    artist:"ناشناخته",
+    title:clean
+  };
+}
+
+/* ================= URL CACHE ================= */
+
+function getAudioURL(song){
+  if(song?.audioUrl) return song.audioUrl;
+  if(!song?.audioBlob) return "";
+
+  if(!audioUrls.has(song.id)){
+    audioUrls.set(
+      song.id,
+      URL.createObjectURL(song.audioBlob)
+    );
+  }
+
+  return audioUrls.get(song.id);
+}
+
+function getCoverURL(song){
+  if(song?.coverUrl) return song.coverUrl;
+  if(!song?.coverBlob) return "";
+
+  if(!coverUrls.has(song.id)){
+    coverUrls.set(
+      song.id,
+      URL.createObjectURL(song.coverBlob)
+    );
+  }
+
+  return coverUrls.get(song.id);
+}
+
+function getNewsImageURL(item){
+  if(item?.imageUrl) return item.imageUrl;
+  if(!item?.imageBlob) return "";
+
+  if(!newsImageUrls.has(item.id)){
+    newsImageUrls.set(
+      item.id,
+      URL.createObjectURL(item.imageBlob)
+    );
+  }
+
+  return newsImageUrls.get(item.id);
+}
+
+function fallbackCover(song){
+  const title=escapeHTML((song?.title||"CAPTAIN").slice(0,18));
+
+  const svg=`
+  <svg xmlns="http://www.w3.org/2000/svg" width="600" height="600">
+    <defs>
+      <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+        <stop stop-color="#ff1730"/>
+        <stop offset="1" stop-color="#050505"/>
+      </linearGradient>
+    </defs>
+    <rect width="600" height="600" fill="url(#g)"/>
+    <circle cx="450" cy="120" r="180" fill="#fff" opacity=".06"/>
+    <text x="50%" y="47%" text-anchor="middle"
+      fill="white" font-size="55" font-family="Arial"
+      font-weight="900">CAPTAIN</text>
+    <text x="50%" y="57%" text-anchor="middle"
+      fill="white" opacity=".65" font-size="30"
+      font-family="Arial">${title}</text>
+  </svg>`;
+
+  return "data:image/svg+xml;charset=UTF-8,"+
+    encodeURIComponent(svg);
+}
+
+function coverSrc(song){
+  return getCoverURL(song)||fallbackCover(song);
+}
+
+/* ================= NEW / TREND ================= */
+
+function isNew(song){
+  if(song.newOverride==="force") return true;
+  if(song.newOverride==="hide") return false;
+
+  return Date.now()-(song.addedAt||0) <= 7*24*60*60*1000;
+}
+
+function trendScore(song){
+  const now=Date.now();
+
+  const recent=(song.playTimes||[])
+    .filter(t=>now-t<24*60*60*1000)
+    .length;
+
+  const growth=recent*8;
+
+  return (
+    recent*100+
+    growth+
+    Number(song.plays||0)*.15+
+    Number(song.liked?40:0)
+  );
+}
+
+function trendLabel(song){
+  const score=trendScore(song);
+
+  if(score>=300) return "🔥 داغ";
+  if(score>=120) return "↗ صعودی";
+  return "• پایدار";
+}
+
+/* ================= CARD ================= */
+
+function songCard(song,rank){
+  return `
+    <article class="songCard" onclick="openSongProfile('${song.id}',true)">
+
+      <button
+        class="likeSmall ${song.liked?'active':''}"
+        onclick="event.stopPropagation();toggleLike('${song.id}')">
+        ${song.liked?'♥':'♡'}
+      </button>
+
+      <img
+        class="cover"
+        loading="lazy"
+        src="${coverSrc(song)}"
+        alt="">
+
+      <button
+        class="playFloat"
+        onclick="event.stopPropagation();playSongById('${song.id}',true)">
+        ▶
+      </button>
+
+      <div class="songBody">
+        <div class="songTitle">${escapeHTML(song.title)}</div>
+        <div class="songArtist">${escapeHTML(song.artist)}</div>
+
+        <div class="songMeta">
+          <span>▶ ${formatNumber(song.plays)}</span>
+          <span>${rank?`#${rank}`:"♪"}</span>
+        </div>
+      </div>
+    </article>
+  `;
+}
+
+function renderGrid(id,list){
+  const el=document.getElementById(id);
+
+  if(!list.length){
+    el.innerHTML=`<div class="empty" style="grid-column:1/-1">
+      هنوز چیزی اینجا نیست
+    </div>`;
+    return;
+  }
+
+  el.innerHTML=list.map((s,i)=>songCard(s,i+1)).join("");
+}
+
+/* ================= HOME ================= */
+
+function renderHome(){
+  const sorted=[...songs].sort((a,b)=>trendScore(b)-trendScore(a));
+
+  renderGrid(
+    "nowGrid",
+    sorted.slice(0,10)
+  );
+
+  const day=songs
+    .map(s=>({
+      s,
+      recent:(s.playTimes||[])
+        .filter(t=>Date.now()-t<86400000)
+        .length
+    }))
+    .sort((a,b)=>b.recent-a.recent)
+    .map(x=>x.s);
+
+  renderGrid(
+    "dayGrid",
+    day.slice(0,10)
+  );
+
+  const fresh=songs
+    .filter(isNew)
+    .sort((a,b)=>(b.addedAt||0)-(a.addedAt||0));
+
+  renderGrid(
+    "newGrid",
+    fresh.slice(0,10)
+  );
+
+  const popular=[...songs]
+    .sort((a,b)=>
+      (b.plays||0)-(a.plays||0)
+    );
+
+  renderGrid(
+    "popularGrid",
+    popular.slice(0,10)
+  );
+
+  renderGrid(
+    "myGrid",
+    [...songs].sort((a,b)=>
+      (b.addedAt||0)-(a.addedAt||0)
+    ).slice(0,10)
+  );
+
+  renderGrid(
+    "favGrid",
+    songs.filter(s=>s.liked)
+  );
+
+  renderGrid(
+    "historyGrid",
+    history
+      .map(id=>songs.find(s=>s.id===id))
+      .filter(Boolean)
+      .slice(0,10)
+  );
+
+  renderArtists();
+}
+
+/* ================= ARTISTS ================= */
+
+function renderArtists(){
+  const map=new Map();
+
+  songs.forEach(song=>{
+    const key=song.artist||"ناشناخته";
+
+    if(!map.has(key)){
+      map.set(key,song);
+    }
+  });
+
+  const list=[...map.entries()];
+
+  const el=document.getElementById("artistRail");
+
+  if(!list.length){
+    el.innerHTML=`<div class="empty">هنوز خواننده‌ای وجود ندارد</div>`;
+    return;
+  }
+
+  el.innerHTML=list.map(([name,song])=>`
+    <div class="artist" onclick="openArtist('${encodeURIComponent(name)}')">
+      <img class="artistImg" src="${coverSrc(song)}">
+      <div class="artistName">${escapeHTML(name)}</div>
+    </div>
+  `).join("");
+}
+
+/* ================= SEARCH ================= */
+
+function debouncedSearch(){
+  clearTimeout(searchTimer);
+
+  searchTimer=setTimeout(()=>{
+    doSearch();
+  },220);
+}
+
+function doSearch(){
+  const q=normalize(
+    document.getElementById("searchInput").value
+  );
+
+  if(!q){
+    renderHome();
+    return;
+  }
+
+  const result=songs.filter(song=>{
+    return normalize(song.title).includes(q) ||
+           normalize(song.artist).includes(q);
+  });
+
+  document.getElementById("nowGrid").innerHTML=
+    result.length
+      ? result.map((s,i)=>songCard(s,i+1)).join("")
+      : `<div class="empty" style="grid-column:1/-1">
+          نتیجه‌ای پیدا نشد
+        </div>`;
+
+  [
+    "dayGrid",
+    "newGrid",
+    "popularGrid",
+    "myGrid",
+    "favGrid",
+    "historyGrid"
+  ].forEach(id=>{
+    document.getElementById(id).innerHTML="";
+  });
+}
+
+/* ================= PLAYBACK ================= */
+
+function addHistory(id){
+  history=history.filter(x=>x!==id);
+  history.unshift(id);
+  history=history.slice(0,100);
+
+  saveUserData("history",history);
+}
+
+async function playSongById(id,openProfile=false){
+  const song=songs.find(s=>s.id===id);
+
+  if(!song) return;
+
+  currentSong=song;
+  currentIndex=songs.findIndex(s=>s.id===id);
+
+  audio.src=getAudioURL(song);
+
+  try{
+    await audio.play();
+  }catch(e){}
+
+  song.plays=(song.plays||0)+1;
+
+  song.playTimes=song.playTimes||[];
+  song.playTimes.push(Date.now());
+
+  song.playTimes=song.playTimes
+    .filter(t=>Date.now()-t<7*86400000)
+    .slice(-1000);
+
+  song.lastPlayedAt=Date.now();
+
+  await dbPut("songs",song);
+
+  addHistory(song.id);
+
+  updatePlayer();
+
+  if(openProfile){
+    openSongProfile(song.id,false);
+  }
+
+  updateProfile();
+  renderHome();
+}
+
+function togglePlay(){
+  if(!currentSong){
+    playRandom();
+    return;
+  }
+
+  if(audio.paused){
+    audio.play().catch(()=>{});
+  }else{
+    audio.pause();
+  }
+
+  updatePlayer();
+  updateProfilePlaying();
+}
+
+function previousSong(){
+  if(!songs.length) return;
+
+  let index=currentIndex-1;
+
+  if(index<0) index=songs.length-1;
+
+  playSongById(songs[index].id,true);
+}
+
+function nextSong(){
+  if(queue.length){
+    const id=queue.shift();
+
+    saveUserData("queue",queue);
+
+    playSongById(id,true);
+    return;
+  }
+
+  if(radioMode){
+    playRandom();
+    return;
+  }
+
+  let index=currentIndex+1;
+
+  if(index>=songs.length) index=0;
+
+  if(songs[index]){
+    playSongById(songs[index].id,true);
+  }
+}
+
+audio.addEventListener("ended",()=>{
+  nextSong();
+});
+
+audio.addEventListener("play",()=>{
+  updatePlayer();
+  updateProfilePlaying();
+});
+
+audio.addEventListener("pause",()=>{
+  updatePlayer();
+  updateProfilePlaying();
+});
+
+audio.addEventListener("timeupdate",()=>{
+  const percent=
+    audio.duration
+      ? (audio.currentTime/audio.duration)*100
+      : 0;
+
+  document.getElementById("playerProgress").style.width=
+    percent+"%";
+
+  document.getElementById("profileProgress").style.width=
+    percent+"%";
+
+  document.getElementById("currentTime").textContent=
+    formatTime(audio.currentTime);
+
+  document.getElementById("duration").textContent=
+    formatTime(audio.duration);
+});
+
+function updatePlayer(){
+  const cover=document.getElementById("playerCover");
+  const title=document.getElementById("playerTitle");
+  const artist=document.getElementById("playerArtist");
+  const btn=document.getElementById("playBtn");
+
+  if(!currentSong){
+    title.textContent="هنوز آهنگی پخش نشده";
+    artist.textContent="CAPTAIN MUSIC";
+    btn.textContent="▶";
+    return;
+  }
+
+  cover.src=coverSrc(currentSong);
+  title.textContent=currentSong.title;
+  artist.textContent=currentSong.artist;
+
+  btn.textContent=audio.paused?"▶":"Ⅱ";
+
+  setAccent(currentSong);
+}
+
+function updateProfilePlaying(){
+  const profile=document.getElementById("profile");
+
+  profile.classList.toggle(
+    "playing",
+    !!currentSong&&!audio.paused
+  );
+}
+
+/* PLAYER CLICK => PROFILE */
+
+document.getElementById("player").addEventListener("click",e=>{
+  if(e.target.closest(".pBtn")) return;
+  if(e.target.closest(".progress")) return;
+
+  if(currentSong){
+    openSongProfile(currentSong.id,false);
+  }
+});
+
+/* ================= PROFILE ================= */
+
+async function openSongProfile(id,playNow=false){
+  const song=songs.find(s=>s.id===id);
+
+  if(!song) return;
+
+  if(playNow){
+    await playSongById(id,false);
+  }else{
+    currentSong=song;
+    currentIndex=songs.findIndex(s=>s.id===id);
+    updatePlayer();
+  }
+
+  updateProfile();
+
+  document.getElementById("profile").classList.add("open");
+
+  document.body.style.overflow="hidden";
+}
+
+function closeProfile(){
+  document.getElementById("profile").classList.remove("open");
+  document.body.style.overflow="";
+}
+
+function updateProfile(){
+  const song=currentSong;
+
+  if(!song) return;
+
+  const profile=document.getElementById("profile");
+
+  profile.style.setProperty(
+    "--songAccent",
+    song._accent||"#ff2038"
+  );
+
+  document.getElementById("profileCover").src=
+    coverSrc(song);
+
+  document.getElementById("profileTitle").textContent=
+    song.title;
+
+  document.getElementById("profileArtist").textContent=
+    song.artist;
+
+  document.getElementById("profilePlays").textContent=
+    formatNumber(song.plays||0);
+
+  document.getElementById("profileLikes").textContent=
+    song.liked?"1":"0";
+
+  document.getElementById("profileTrend").textContent=
+    trendLabel(song);
+
+  updateProfilePlaying();
+
+  renderProfileQueue();
+  renderSuggestions();
+
+  extractAccent(song);
+}
+
+function profilePlay(){
+  if(!currentSong) return;
+
+  if(audio.src!==getAudioURL(currentSong)){
+    playSongById(currentSong.id,false);
+  }else{
+    togglePlay();
+  }
+}
+
+function profileLike(){
+  if(currentSong){
+    toggleLike(currentSong.id);
+  }
+}
+
+function profileNext(){
+  if(!currentSong) return;
+
+  addToQueue(currentSong.id,true);
+
+  showToast("به عنوان آهنگ بعدی اضافه شد");
+}
+
+function profileQueue(){
+  addToQueue(currentSong?.id);
+
+  showToast("به صف پخش اضافه شد");
+}
+
+function profilePlaylist(){
+  openPlaylistModal(currentSong?.id);
+}
+
+function profileShare(){
+  if(!currentSong) return;
+
+  const text=
+    `🎵 ${currentSong.title} — ${currentSong.artist}\nCAPTAIN MUSIC`;
+
+  if(navigator.share){
+    navigator.share({
+      title:currentSong.title,
+      text
+    }).catch(()=>{});
+  }else{
+    navigator.clipboard?.writeText(text);
+    showToast("اطلاعات آهنگ کپی شد");
+  }
+}
+
+function profileHistory(){
+  if(currentSong){
+    addHistory(currentSong.id);
+    showToast("در تاریخچه ثبت شد");
+  }
+}
+
+function profileArtist(){
+  if(currentSong){
+    openArtist(
+      encodeURIComponent(currentSong.artist)
+    );
+  }
+}
+
+function setAccent(song){
+  const color=song?._accent||"#ff2038";
+
+  document.documentElement.style.setProperty(
+    "--songAccent",
+    color
+  );
+}
+
+/* ================= COLOR ================= */
+
+function extractAccent(song){
+  if(song._accent){
+    setAccent(song);
+    return;
+  }
+
+  if(!song.coverBlob){
+    song._accent="#ff2038";
+    setAccent(song);
+    return;
+  }
+
+  const img=new Image();
+
+  img.src=getCoverURL(song);
+
+  img.onload=()=>{
+    try{
+      const canvas=document.createElement("canvas");
+      const ctx=canvas.getContext("2d");
+
+      canvas.width=20;
+      canvas.height=20;
+
+      ctx.drawImage(img,0,0,20,20);
+
+      const data=ctx.getImageData(0,0,20,20).data;
+
+      let r=0,g=0,b=0,count=0;
+
+      for(let i=0;i<data.length;i+=4){
+        const rr=data[i];
+        const gg=data[i+1];
+        const bb=data[i+2];
+
+        if(rr+gg+bb<70) continue;
+
+        r+=rr;
+        g+=gg;
+        b+=bb;
+        count++;
+      }
+
+      if(count){
+        r=Math.round(r/count);
+        g=Math.round(g/count);
+        b=Math.round(b/count);
+
+        song._accent=
+          `rgb(${r},${g},${b})`;
+
+        setAccent(song);
+        dbPut("songs",song);
+      }
+    }catch(e){}
+  };
+}
+
+/* ================= PROFILE QUEUE ================= */
+
+function renderProfileQueue(){
+  const el=document.getElementById("profileQueue");
+
+  if(!queue.length){
+    el.innerHTML=
+      `<div style="color:#666;font-size:10px">
+        صف پخش خالی است
+      </div>`;
+    return;
+  }
+
+  const list=queue
+    .map(id=>songs.find(s=>s.id===id))
+    .filter(Boolean)
+    .slice(0,8);
+
+  el.innerHTML=list.map(s=>`
+    <div class="profileMini" onclick="playSongById('${s.id}',true)">
+      <img src="${coverSrc(s)}">
+      <div>
+        <b>${escapeHTML(s.title)}</b>
+        <span>${escapeHTML(s.artist)}</span>
+      </div>
+    </div>
+  `).join("");
+}
+
+/* ================= SUGGESTIONS ================= */
+
+function renderSuggestions(){
+  const el=document.getElementById("profileSuggestions");
+
+  if(!currentSong){
+    el.innerHTML="";
+    return;
+  }
+
+  const artist=normalize(currentSong.artist);
+
+  let list=songs
+    .filter(s=>s.id!==currentSong.id)
+    .sort((a,b)=>{
+      const aa=
+        normalize(a.artist)===artist?100000:0;
+
+      const bb=
+        normalize(b.artist)===artist?100000:0;
+
+      return (bb+trendScore(b))-(aa+trendScore(a));
+    })
+    .slice(0,8);
+
+  el.innerHTML=list.map(s=>`
+    <div class="profileMini"
+      onclick="openSongProfile('${s.id}',true)">
+      <img src="${coverSrc(s)}">
+      <div>
+        <b>${escapeHTML(s.title)}</b>
+        <span>${escapeHTML(s.artist)}</span>
+      </div>
+    </div>
+  `).join("");
+}
+
+/* ================= LIKE ================= */
+
+async function toggleLike(id){
+  const song=songs.find(s=>s.id===id);
+
+  if(!song) return;
+
+  song.liked=!song.liked;
+
+  await dbPut("songs",song);
+
+  if(currentSong?.id===id){
+    currentSong=song;
+    updateProfile();
+  }
+
+  renderHome();
+
+  showToast(
+    song.liked
+      ?"❤️ به موردعلاقه‌ها اضافه شد"
+      :"از موردعلاقه‌ها حذف شد"
+  );
+}
+
+/* ================= QUEUE ================= */
+
+async function addToQueue(id,first=false){
+  if(!id) return;
+
+  queue=queue.filter(x=>x!==id);
+
+  if(first){
+    queue.unshift(id);
+  }else{
+    queue.push(id);
+  }
+
+  await saveUserData("queue",queue);
+
+  renderProfileQueue();
+}
+
+function removeQueue(id){
+  queue=queue.filter(x=>x!==id);
+
+  saveUserData("queue",queue);
+
+  renderQueueModal();
+  renderProfileQueue();
+}
+
+function clearQueue(){
+  queue=[];
+
+  saveUserData("queue",queue);
+
+  renderQueueModal();
+  renderProfileQueue();
+}
+
+function shuffleQueue(){
+  for(let i=queue.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+
+    [queue[i],queue[j]]=
+    [queue[j],queue[i]];
+  }
+
+  saveUserData("queue",queue);
+
+  renderQueueModal();
+  renderProfileQueue();
+}
+
+/* ================= QUEUE MODAL ================= */
+
+function openQueue(){
+  renderQueueModal();
+  openModal();
+}
+
+function renderQueueModal(){
+  const content=document.getElementById("modalContent");
+
+  content.innerHTML=`
+    <div class="modalHead">
+      <h2>☷ صف پخش</h2>
+      <button class="close" onclick="closeModal()">×</button>
+    </div>
+
+    <div style="display:flex;gap:8px;margin-bottom:15px">
+      <button class="darkBtn" onclick="shuffleQueue()">🔀 تصادفی</button>
+      <button class="darkBtn" onclick="clearQueue()">پاک کردن</button>
+    </div>
+
+    ${
+      queue.length
+      ?queue.map(id=>{
+        const s=songs.find(x=>x.id===id);
+        if(!s) return "";
+
+        return `
+          <div class="queueItem">
+            <img src="${coverSrc(s)}">
+
+            <div class="queueInfo"
+              onclick="playSongById('${s.id}',true)">
+              <b>${escapeHTML(s.title)}</b>
+              <span>${escapeHTML(s.artist)}</span>
+            </div>
+
+            <button class="deleteBtn"
+              onclick="removeQueue('${s.id}')">
+              ×
+            </button>
+          </div>
+        `;
+      }).join("")
+      :`<div class="empty">صف پخش خالی است</div>`
+    }
+  `;
+}
+
+/* ================= PLAYLIST ================= */
+
+async function openPlaylistModal(songId){
+  const content=document.getElementById("modalContent");
+
+  const names=Object.keys(playlists);
+
+  content.innerHTML=`
+    <div class="modalHead">
+      <h2>▤ پلی‌لیست</h2>
+      <button class="close" onclick="closeModal()">×</button>
+    </div>
+
+    <button class="redBtn" onclick="createPlaylist()">
+      ＋ ساخت پلی‌لیست
+    </button>
+
+    <div style="margin-top:15px">
+      ${
+        names.length
+        ?names.map(name=>`
+          <button class="menuItem"
+            onclick="addSongToPlaylist('${encodeURIComponent(name)}','${songId}')">
+            <span>♫</span>
+            ${escapeHTML(name)}
+          </button>
+        `).join("")
+        :`<div class="empty">پلی‌لیستی ساخته نشده</div>`
+      }
+    </div>
+  `;
+
+  openModal();
+}
+
+async function createPlaylist(){
+  const name=prompt("نام پلی‌لیست:");
+
+  if(!name?.trim()) return;
+
+  playlists[name.trim()]=[];
+
+  await saveUserData("playlists",playlists);
+
+  showToast("پلی‌لیست ساخته شد");
+
+  if(currentSong){
+    openPlaylistModal(currentSong.id);
+  }
+}
+
+async function addSongToPlaylist(encoded,id){
+  const name=decodeURIComponent(encoded);
+
+  if(!playlists[name]){
+    playlists[name]=[];
+  }
+
+  if(!playlists[name].includes(id)){
+    playlists[name].push(id);
+  }
+
+  await saveUserData("playlists",playlists);
+
+  closeModal();
+
+  showToast("به پلی‌لیست اضافه شد");
+}
+
+/* ================= ARTIST ================= */
+
+function openArtist(encoded){
+  const artist=decodeURIComponent(encoded);
+
+  const list=songs.filter(
+    s=>normalize(s.artist)===normalize(artist)
+  );
+
+  const content=document.getElementById("modalContent");
+
+  content.innerHTML=`
+    <div class="modalHead">
+      <h2>🎤 ${escapeHTML(artist)}</h2>
+      <button class="close" onclick="closeModal()">×</button>
+    </div>
+
+    <div class="grid" style="padding:0">
+      ${list.map((s,i)=>songCard(s,i+1)).join("")}
+    </div>
+  `;
+
+  openModal();
+}
+
+/* ================= NEWS ================= */
+
+function renderNews(){
+  const el=document.getElementById("newsRail");
+
+  if(!news.length){
+    el.innerHTML=`
+      <div class="empty" style="min-width:280px">
+        هنوز خبری منتشر نشده
+      </div>`;
+    return;
+  }
+
+  const sorted=[...news]
+    .sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
+
+  el.innerHTML=sorted.map(item=>`
+    <article class="newsCard"
+      onclick="openNews('${item.id}')">
+
+      ${
+        (item.imageBlob||item.imageUrl)
+        ?`<img
+            class="newsImage"
+            loading="lazy"
+            src="${getNewsImageURL(item)}">`
+        :`<div class="newsNoImage">📰</div>`
+      }
+
+      <div class="newsShade"></div>
+
+      <div class="newsInfo">
+        <div class="newsTag">MUSIC NEWS</div>
+
+        <div class="newsTitle">
+          ${escapeHTML(item.title)}
+        </div>
+
+        <div class="newsTime">
+          ${timeAgo(item.createdAt)}
+        </div>
+      </div>
+    </article>
+  `).join("");
+
+  autoNewsScroll();
+}
+
+let newsAutoTimer;
+
+function autoNewsScroll(){
+  clearInterval(newsAutoTimer);
+
+  const rail=document.getElementById("newsRail");
+
+  if(news.length<2) return;
+
+  let direction=1;
+
+  newsAutoTimer=setInterval(()=>{
+    if(!rail || rail.matches(":hover")) return;
+
+    const max=rail.scrollWidth-rail.clientWidth;
+
+    if(max<=0) return;
+
+    if(
+      rail.scrollLeft<=-max+5 ||
+      rail.scrollLeft>=5
+    ){
+      direction*=-1;
+    }
+
+    rail.scrollLeft+=direction*205;
+  },4500);
+}
+
+function openNews(id){
+  const item=news.find(n=>n.id===id);
+
+  if(!item) return;
+
+  const content=document.getElementById("modalContent");
+
+  content.innerHTML=`
+    <div class="modalHead">
+      <h2>📰 خبر موسیقی</h2>
+      <button class="close" onclick="closeModal()">×</button>
+    </div>
+
+    ${
+      (item.imageBlob||item.imageUrl)
+      ?`<img class="newsDetailImage"
+          src="${getNewsImageURL(item)}">`
+      :`<div class="newsDetailNoImage">📰</div>`
+    }
+
+    <div class="newsDetailTitle">
+      ${escapeHTML(item.title)}
+    </div>
+
+    <div class="newsDetailDate">
+      ${new Date(item.createdAt||Date.now()).toLocaleString("fa-IR")}
+    </div>
+
+    <div class="newsDetailText">
+      ${escapeHTML(item.text||"")}
+    </div>
+  `;
+
+  openModal();
+}
+
+function openAllNews(){
+  const content=document.getElementById("modalContent");
+
+  const sorted=[...news]
+    .sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
+
+  content.innerHTML=`
+    <div class="modalHead">
+      <h2>📰 همه اخبار</h2>
+      <button class="close" onclick="closeModal()">×</button>
+    </div>
+
+    <div class="grid" style="padding:0">
+      ${sorted.map(item=>`
+        <article class="newsCard"
+          onclick="openNews('${item.id}')">
+
+          ${
+            (item.imageBlob||item.imageUrl)
+            ?`<img class="newsImage"
+                loading="lazy"
+                src="${getNewsImageURL(item)}">`
+            :`<div class="newsNoImage">📰</div>`
+          }
+
+          <div class="newsShade"></div>
+
+          <div class="newsInfo">
+            <div class="newsTag">NEWS</div>
+            <div class="newsTitle">
+              ${escapeHTML(item.title)}
+            </div>
+          </div>
+
+        </article>
+      `).join("")}
+    </div>
+  `;
+
+  openModal();
+}
+
+/* ================= OWNER ================= */
+
+function openOwnerLogin(){
+  closeDrawer();
+
+  const content=document.getElementById("modalContent");
+
+  content.innerHTML=`
+    <div class="modalHead">
+      <h2>♛ ورود مالک</h2>
+      <button class="close" onclick="closeModal()">×</button>
+    </div>
+
+    <div class="form">
+      <input
+        class="input"
+        id="ownerPassword"
+        type="password"
+        placeholder="رمز مالک">
+
+      <button class="redBtn"
+        onclick="checkOwner()">
+        ورود به پنل
+      </button>
+    </div>
+  `;
+
+  openModal();
+}
+
+function checkOwner(){
+  const pass=document.getElementById("ownerPassword").value;
+
+  if(pass!==OWNER_PASSWORD){
+    showToast("رمز اشتباه است");
+    return;
+  }
+
+  openOwnerPanel();
+}
+
+function openOwnerPanel(){
+  const content=document.getElementById("modalContent");
+
+  content.innerHTML=`
+    <div class="modalHead">
+      <h2>♛ پنل مالک</h2>
+      <button class="close" onclick="closeModal()">×</button>
+    </div>
+
+    <div class="sectionTitle" style="margin-bottom:12px">
+      افزودن چند آهنگ
+    </div>
+
+    <div class="form">
+      <input
+        class="fileInput"
+        type="file"
+        id="songFiles"
+        accept="audio/*"
+        multiple>
+
+      <input
+        class="fileInput"
+        type="file"
+        id="songCover"
+        accept="image/*">
+
+      <button class="redBtn"
+        onclick="addMultipleSongs()">
+        ＋ افزودن آهنگ‌ها
+      </button>
+    </div>
+
+    <hr style="border:0;border-top:1px solid #222;margin:25px 0">
+
+    <div class="sectionTitle" style="margin-bottom:12px">
+      افزودن خبر
+    </div>
+
+    <div class="form">
+      <input
+        class="input"
+        id="newsTitleInput"
+        placeholder="عنوان خبر">
+
+      <textarea
+        class="textarea"
+        id="newsTextInput"
+        placeholder="متن کامل خبر"></textarea>
+
+      <input
+        class="fileInput"
+        type="file"
+        id="newsImageInput"
+        accept="image/*">
+
+      <button class="redBtn"
+        onclick="addNews()">
+        ＋ انتشار خبر
+      </button>
+    </div>
+
+    <hr style="border:0;border-top:1px solid #222;margin:25px 0">
+
+    <div class="sectionTitle">
+      مدیریت آهنگ‌ها
+    </div>
+
+    <div class="ownerList" id="ownerSongs"></div>
+
+    <div class="sectionTitle" style="margin-top:25px">
+      مدیریت اخبار
+    </div>
+
+    <div class="ownerList" id="ownerNews"></div>
+  `;
+
+  renderOwnerLists();
+}
+
+function renderOwnerLists(){
+  const songEl=document.getElementById("ownerSongs");
+  const newsEl=document.getElementById("ownerNews");
+
+  if(!songEl||!newsEl) return;
+
+  songEl.innerHTML=songs.length
+    ?songs
+      .sort((a,b)=>(b.addedAt||0)-(a.addedAt||0))
+      .map(s=>`
+        <div class="ownerItem">
+
+          <img src="${coverSrc(s)}">
+
+          <div class="ownerItemInfo">
+            <b>${escapeHTML(s.title)}</b>
+            <span>${escapeHTML(s.artist)}</span>
+          </div>
+
+          <button class="deleteBtn"
+            onclick="deleteSong('${s.id}')">
+            🗑
+          </button>
+
+        </div>
+      `).join("")
+    :`<div class="empty">آهنگی وجود ندارد</div>`;
+
+  newsEl.innerHTML=news.length
+    ?news
+      .sort((a,b)=>(b.createdAt||0)-(a.createdAt||0))
+      .map(n=>`
+        <div class="ownerItem">
+
+          ${
+            (n.imageBlob||n.imageUrl)
+            ?`<img src="${getNewsImageURL(n)}">`
+            :`<div style="
+                width:50px;
+                height:50px;
+                border-radius:10px;
+                display:grid;
+                place-items:center;
+                background:#19191b">
+                📰
+              </div>`
+          }
+
+          <div class="ownerItemInfo">
+            <b>${escapeHTML(n.title)}</b>
+            <span>${timeAgo(n.createdAt)}</span>
+          </div>
+
+          <button class="deleteBtn"
+            onclick="deleteNews('${n.id}')">
+            🗑
+          </button>
+
+        </div>
+      `).join("")
+    :`<div class="empty">خبری وجود ندارد</div>`;
+}
+
+/* MULTIPLE SONGS */
+
+async function addMultipleSongs(){
+  const files=[
+    ...document.getElementById("songFiles").files
+  ];
+
+  const coverFile=
+    document.getElementById("songCover").files[0];
+
+  if(!files.length){
+    showToast("حداقل یک آهنگ انتخاب کن");
+    return;
+  }
+
+  const coverBlob=coverFile||null;
+
+  let added=0;
+
+  for(const file of files){
+
+    if(!file.type.startsWith("audio/")){
+      continue;
+    }
+
+    const parsed=parseFilename(file.name);
+
+    const song={
+      id:uid(),
+      title:parsed.title,
+      artist:parsed.artist,
+      audioBlob:file,
+      coverBlob,
+      addedAt:Date.now(),
+      plays:0,
+      playTimes:[],
+      liked:false,
+      newOverride:null,
+      lastPlayedAt:null
+    };
+
+    await dbPut("songs",song);
+
+    songs.push(song);
+
+    added++;
+
+    await new Promise(r=>setTimeout(r,15));
+  }
+
+  renderHome();
+  renderOwnerLists();
+
+  showToast(`${added} آهنگ اضافه شد`);
+}
+
+/* DELETE SONG */
+
+async function deleteSong(id){
+  const song=songs.find(s=>s.id===id);
+
+  if(!song) return;
+
+  if(!confirm(`آهنگ «${song.title}» حذف شود؟`)){
+    return;
+  }
+
+  await dbDelete("songs",id);
+
+  if(audioUrls.has(id)){
+    URL.revokeObjectURL(audioUrls.get(id));
+    audioUrls.delete(id);
+  }
+
+  if(coverUrls.has(id)){
+    URL.revokeObjectURL(coverUrls.get(id));
+    coverUrls.delete(id);
+  }
+
+  songs=songs.filter(s=>s.id!==id);
+
+  queue=queue.filter(x=>x!==id);
+  history=history.filter(x=>x!==id);
+
+  await saveUserData("queue",queue);
+  await saveUserData("history",history);
+
+  if(currentSong?.id===id){
+    audio.pause();
+    audio.removeAttribute("src");
+    currentSong=null;
+    updatePlayer();
+    closeProfile();
+  }
+
+  renderHome();
+  renderOwnerLists();
+
+  showToast("آهنگ حذف شد");
+}
+
+/* ADD NEWS */
+
+async function addNews(){
+  const title=
+    document.getElementById("newsTitleInput").value.trim();
+
+  const text=
+    document.getElementById("newsTextInput").value.trim();
+
+  const image=
+    document.getElementById("newsImageInput").files[0]||null;
+
+  if(!title||!text){
+    showToast("عنوان و متن خبر را وارد کن");
+    return;
+  }
+
+  const item={
+    id:uid(),
+    title,
+    text,
+    imageBlob:image,
+    createdAt:Date.now()
+  };
+
+  await dbPut("news",item);
+
+  news.unshift(item);
+
+  renderNews();
+  renderOwnerLists();
+
+  document.getElementById("newsTitleInput").value="";
+  document.getElementById("newsTextInput").value="";
+  document.getElementById("newsImageInput").value="";
+
+  showToast("خبر منتشر شد");
+}
+
+/* DELETE NEWS */
+
+async function deleteNews(id){
+  const item=news.find(n=>n.id===id);
+
+  if(!item) return;
+
+  if(!confirm(`خبر «${item.title}» حذف شود؟`)){
+    return;
+  }
+
+  await dbDelete("news",id);
+
+  if(newsImageUrls.has(id)){
+    URL.revokeObjectURL(newsImageUrls.get(id));
+    newsImageUrls.delete(id);
+  }
+
+  news=news.filter(n=>n.id!==id);
+
+  renderNews();
+  renderOwnerLists();
+
+  showToast("خبر حذف شد");
+}
+
+/* ================= RADIO ================= */
+
+function toggleRadio(){
+  radioMode=!radioMode;
+
+  showToast(
+    radioMode
+      ?"📻 CAPTAIN Radio روشن شد"
+      :"📻 CAPTAIN Radio خاموش شد"
+  );
+}
+
+function playRandom(){
+  if(!songs.length){
+    showToast("هنوز آهنگی اضافه نشده");
+    return;
+  }
+
+  const index=
+    Math.floor(Math.random()*songs.length);
+
+  playSongById(songs[index].id,true);
+}
+
+/* ================= MODAL ================= */
+
+function openModal(){
+  document.getElementById("modalBack")
+    .classList.add("open");
+}
+
+function closeModal(e){
+  if(e && e.target!==e.currentTarget) return;
+
+  document.getElementById("modalBack")
+    .classList.remove("open");
+}
+
+/* ================= DRAWER ================= */
+
+function openDrawer(){
+  document.getElementById("drawerBack")
+    .classList.add("open");
+}
+
+function closeDrawer(e){
+  if(e && e.target!==e.currentTarget) return;
+
+  document.getElementById("drawerBack")
+    .classList.remove("open");
+}
+
+/* ================= ABOUT ================= */
+
+function openAbout(){
+  const content=document.getElementById("modalContent");
+
+  content.innerHTML=`
+    <div class="modalHead">
+      <h2>CAPTAIN MUSIC</h2>
+      <button class="close" onclick="closeModal()">×</button>
+    </div>
+
+    <div style="
+      text-align:center;
+      padding:30px 10px;
+      color:#999;
+      line-height:2">
+
+      <div style="
+        font-size:40px;
+        font-weight:1000;
+        color:#fff;
+        margin-bottom:12px">
+        CAPTAIN
+      </div>
+
+      <div style="
+        color:#ff243b;
+        letter-spacing:4px;
+        direction:ltr">
+        MUSIC
+      </div>
+
+      <p style="margin-top:20px">
+        یک موزیک‌پلیر شخصی با طراحی اختصاصی،
+        صف پخش، تاریخچه، علاقه‌مندی،
+        اخبار موسیقی و پنل مدیریت مالک.
+      </p>
+
+    </div>
+  `;
+
+  openModal();
+}
+
+/* ================= PROFILE SEEK ================= */
+
+document.getElementById("profileSeek")
+.addEventListener("click",e=>{
+  if(!audio.duration) return;
+
+  const rect=e.currentTarget.getBoundingClientRect();
+
+  const percent=
+    (e.clientX-rect.left)/rect.width;
+
+  audio.currentTime=
+    audio.duration*Math.max(0,Math.min(1,percent));
+});
+
+/* PLAYER PROGRESS */
+
+document.querySelector(".progress")
+.addEventListener("click",e=>{
+  e.stopPropagation();
+
+  if(!audio.duration) return;
+
+  const rect=e.currentTarget.getBoundingClientRect();
+
+  const percent=
+    (e.clientX-rect.left)/rect.width;
+
+  audio.currentTime=
+    audio.duration*Math.max(0,Math.min(1,percent));
+});
+
+/* ================= KEYBOARD ================= */
+
+document.addEventListener("keydown",e=>{
+  if(e.code==="Space"){
+    const tag=document.activeElement?.tagName;
+
+    if(tag==="INPUT"||tag==="TEXTAREA") return;
+
+    e.preventDefault();
+    togglePlay();
+  }
+
+  if(e.code==="ArrowRight"){
+    audio.currentTime+=5;
+  }
+
+  if(e.code==="ArrowLeft"){
+    audio.currentTime-=5;
+  }
+
+  if(e.code==="Escape"){
+    closeProfile();
+    closeModal();
+    closeDrawer();
+  }
+});
+
+/* ================= CLEANUP ================= */
+
+window.addEventListener("beforeunload",()=>{
+  audioUrls.forEach(url=>URL.revokeObjectURL(url));
+  coverUrls.forEach(url=>URL.revokeObjectURL(url));
+  newsImageUrls.forEach(url=>URL.revokeObjectURL(url));
+});
+
+/* ================= INIT ================= */
+
+async function init(){
+
+  try{
+    initCloud();
+    await openDB();
+    await loadData();
+
+    renderNews();
+    renderHome();
+
+    setTimeout(()=>{
+      document.getElementById("loader")
+        .classList.add("hide");
+    },450);
+
+  }catch(error){
+
+    console.error(error);
+
+    document.getElementById("loader").innerHTML=`
+      <div style="
+        text-align:center;
+        color:#fff;
+        padding:25px">
+        <h2>خطا در راه‌اندازی</h2>
+        <p style="color:#777;margin-top:10px">
+          مرورگر شما IndexedDB را پشتیبانی نمی‌کند.
+        </p>
+      </div>
+    `;
+  }
+}
+
+init();
+
+</script>
+
+</body>
+</html>
